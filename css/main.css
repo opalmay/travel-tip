@@ -75,6 +75,7 @@ h3 {
     display: inline-block;
     border: 2px solid black;
     padding: 1rem;
+    margin-bottom: 10px;
 }
 
 .weather .weatherIcon {
@@ -110,7 +111,7 @@ h3 {
 .header{
     margin-top: 20px;
 }
-.header .locationSearch >*:not(:last-child){
+.header .locationSearch *:not(:last-child){
     margin-right: 10px;
 }
 .header .locationSearch{
@@ -167,9 +168,17 @@ h3 {
 
 
 @media only screen and (max-width:1100px){
-    .header,.main{
+    .header,.main,.locationSearch{
         flex-direction: column;
     }
+    .header input{
+        margin-bottom: 10px;
+    }
+    /* .header .locationSearch * :not(:last-child){
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 10px;
+    } */
     .map{
         width: 70%;
     }
