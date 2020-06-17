@@ -11,10 +11,18 @@ function onGoToMyLocation() {
 }
 
 function getLocationStr(lat, lng) {
-    var prmLocation = mapService.getAnsWithAxios(lat, lng);
+    var prmLocation = mapService.getAddressWithAxios(lat, lng);
     prmLocation.then((locationStr) => {
         renderLocationStr(locationStr)
     })
+}
+
+function getLatLngNewLocation(address){
+    var prmLatLng = mapService.getLatLngWithAxios(address);
+    prmLatLng.then((coords) => {
+        onGoToLocation(coords.results[0].geometry.location.lat, coords.results[0].geometry.location.lng)
+    })
+    
 }
 
 function onGoToLocation(lat, lng) {
@@ -78,8 +86,8 @@ window.onload = () => {
         .catch(console.log('INIT MAP ERROR'));
 }
 
-function print() {
-    console.log(document.querySelector('#my-location-input').value);
+function newAddress() {
+    getLatLngNewLocation(document.querySelector('#my-location-input').value);
 }
 function showToast() {
     // Get the snackbar DIV
