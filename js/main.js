@@ -66,12 +66,14 @@ function renderWeather(weather) {
     }
 }
 function onCopyLocation() {
-    // navigator.clipboard.writeText(`opalmay.github.io/travelTip/index.html?lat=${gLastLocation.lat}&lng=${gLastLocation.lng}`);
+    // navigator.clipboard.writeText(`opalmay.github.io/travel-tip/index.html?lat=${gLastLocation.lat}&lng=${gLastLocation.lng}`);
     navigator.clipboard.writeText(`http://127.0.0.1:5500/index.html?lat=${gLastLocation.lat}&lng=${gLastLocation.lng}`);
+    showToast();
 }
 window.onload = () => {
     document.querySelector('.myLocation').addEventListener('click', onGoToMyLocation);
     document.querySelector('.copyLocation').addEventListener('click', onCopyLocation);
+    document.querySelector('.my-location-go').addEventListener('click', print);
 
     const urlParams = new URLSearchParams(window.location.search);
     const lat = +urlParams.get('lat');
@@ -82,16 +84,18 @@ window.onload = () => {
             else onGoToMyLocation();
         })
         .catch(console.log('INIT MAP ERROR'));
-    // locService.getPosition()
-    //     .then(pos => {
-    //         myLocation(pos)
-    //     })
-    // .catch(err => {
-    //     console.log('err!!!', err);
-    // })
-    document.querySelector('.my-location-go').addEventListener('click', newAddress);
 }
 
 function newAddress() {
     getLatLngNewLocation(document.querySelector('#my-location-input').value);
 }
+function showToast() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
+  
+    // Add the "show" class to DIV
+    x.className = "show";
+  
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
