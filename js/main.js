@@ -5,7 +5,7 @@ import { mapService } from './services/map.service.js'
 import { weatherService } from './services/weather.service.js'
 import { icons } from './icons.js';
 
-
+var gLastLocation;
 function onGoToMyLocation() {
     locService.getPosition().then(location => onGoToLocation(location.coords.latitude, location.coords.longitude))
 }
@@ -18,6 +18,7 @@ function getLocationStr(lat, lng) {
 }
 
 function onGoToLocation(lat, lng) {
+    gLastLocation = { lat, lng };
     getLocationStr(lat, lng);
     mapService.panTo({ lat, lng });
     mapService.addMarker({ lat, lng });
@@ -25,7 +26,10 @@ function onGoToLocation(lat, lng) {
 }
 
 function renderLocationStr(locationName) {
-    document.querySelector('.currLocation span').innerText = locationName.results[0].formatted_address;
+    let locationResult = locationName.results;
+    let locationStr = 'Not Found';
+    if (locationResult.length !== 0) locationStr = locationName.results[0].formatted_address;
+    document.querySelector('.currLocation span').innerText = locationStr;
 }
 
 function renderWeather(weather) {
@@ -53,11 +57,21 @@ function renderWeather(weather) {
         document.querySelector('img').src = `svg/${icon}.svg`;
     }
 }
+function onCopyLocation() {
+    // navigator.clipboard.writeText(`opalmay.github.io/travelTip/index.html?lat=${gLastLocation.lat}&lng=${gLastLocation.lng}`);
+    navigator.clipboard.writeText(`http://127.0.0.1:5500/index.html?lat=${gLastLocation.lat}&lng=${gLastLocation.lng}`);
+}
 window.onload = () => {
     document.querySelector('.myLocation').addEventListener('click', onGoToMyLocation);
+    document.querySelector('.copyLocation').addEventListener('click', onCopyLocation);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const lat = +urlParams.get('lat');
+    const lng = +urlParams.get('lng');
     mapService.initMap()
         .then(() => {
-            onGoToMyLocation();
+            if (lat && lng) onGoToLocation(lat, lng);
+            else onGoToMyLocation();
         })
         .catch(console.log('INIT MAP ERROR'));
     // locService.getPosition()
