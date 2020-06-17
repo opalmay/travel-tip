@@ -5,7 +5,7 @@ import { mapService } from './services/map.service.js'
 import { weatherService } from './services/weather.service.js'
 import { icons } from './icons.js';
 
-var gLastLocation;
+var lastLocation;
 function onGoToMyLocation() {
     locService.getPosition().then(location => onGoToLocation(location.coords.latitude, location.coords.longitude))
 }
@@ -17,15 +17,15 @@ function getLocationStr(lat, lng) {
     })
 }
 
-function getLatLngNewLocation(address){
+function getLatLngNewLocation(address) {
     var prmLatLng = mapService.getLatLngWithAxios(address);
     prmLatLng.then((coords) => {
         onGoToLocation(coords.results[0].geometry.location.lat, coords.results[0].geometry.location.lng)
     })
-    
+
 }
 function onGoToLocation(lat, lng) {
-    gLastLocation = { lat, lng };
+    lastLocation = { lat, lng };
     getLocationStr(lat, lng);
     mapService.panTo({ lat, lng });
     mapService.addMarker({ lat, lng });
@@ -66,13 +66,14 @@ function renderWeather(weather) {
 }
 function onCopyLocation() {
     // navigator.clipboard.writeText(`opalmay.github.io/travel-tip/index.html?lat=${gLastLocation.lat}&lng=${gLastLocation.lng}`);
-    navigator.clipboard.writeText(`http://127.0.0.1:5500/index.html?lat=${gLastLocation.lat}&lng=${gLastLocation.lng}`);
+    navigator.clipboard.writeText(`http://127.0.0.1:5500/index.html?lat=${lastLocation.lat}&lng=${lastLocation.lng}`);
     showToast();
 }
 window.onload = () => {
     document.querySelector('.myLocation').addEventListener('click', onGoToMyLocation);
     document.querySelector('.copyLocation').addEventListener('click', onCopyLocation);
     document.querySelector('.my-location-go').addEventListener('click', newAddress);
+    document.querySelector('#my-location-input').addEventListener('keyup', (event) => { if (event.keyCode === 13) newAddress(); });
 
     const urlParams = new URLSearchParams(window.location.search);
     const lat = +urlParams.get('lat');
@@ -89,7 +90,7 @@ function newAddress() {
     getLatLngNewLocation(document.querySelector('#my-location-input').value);
 }
 function showToast() {
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-  }
+    var x = document.getElementById('snackbar');
+    x.className = 'show';
+    setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
+}

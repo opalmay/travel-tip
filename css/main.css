@@ -107,6 +107,15 @@ h3 {
 .info{
     margin-bottom: 1rem;
 }
+.header{
+    margin-top: 20px;
+}
+.header .locationSearch >*:not(:last-child){
+    margin-right: 10px;
+}
+.header .locationSearch{
+    margin-bottom: 10px;
+}
 
 
 
