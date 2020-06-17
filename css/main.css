@@ -173,6 +173,7 @@ h3 {
     }
     .header input{
         margin-bottom: 10px;
+        width: 325px;
     }
     /* .header .locationSearch * :not(:last-child){
         margin-right: 0;
