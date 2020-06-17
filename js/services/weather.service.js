@@ -7,11 +7,10 @@ export function getWeather(lat, lon) {
 
         httpRequest.onreadystatechange = () => {
             if (httpRequest.readyState === XMLHttpRequest.DONE) {
-                if(httpRequest.status === 200){
-                const ans = JSON.parse(httpRequest.responseText);
-                resolve(ans);
-                }
-
+                if (httpRequest.status === 200) {
+                    const ans = JSON.parse(httpRequest.responseText);
+                    resolve(ans);
+                } else reject(ans);
             }
         }
 
