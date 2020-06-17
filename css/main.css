@@ -39,3 +39,9 @@ body{
 .flex .align-self-center {
     align-self: center;
 }
+
+
+/* WEATHER */
+.weatherIcon{
+    width: 2rem;
+}
