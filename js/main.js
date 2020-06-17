@@ -25,18 +25,18 @@ function onGoToLocation(lat, lng) {
 }
 function renderWeather(weather) {
     let elWeather = document.querySelector('.weather');
-    elWeather.querySelector('.weatherFirstLine').innerText = `${weather.name},${weather.sys.country} ${weather.description}`;
+    elWeather.querySelector('.weatherFirstLine').innerText = `${weather.name}, ${weather.sys.country} ${weather.weather[0].description}`;
     elWeather.querySelector('.weatherSecondLine').innerText = `${weather.main.temp}, temperature from ${weather.main.temp_min} to ${weather.main.temp_max}C,
     wind ${weather.wind.speed} m/s`;
 }
 window.onload = () => {
     // document.querySelector('myLocation').addEventListener('click', onGoToMyLocation);
-    weatherService.getWeather(32.0749831, 34.9120554).then((ans) => {
-        console.log(ans)
-        renderWeather(ans);
+    weatherService.getWeather(32.0749831, 34.9120554).then((weather) => {
+        console.log(weather);
+        renderWeather(weather);
         var weatherIcons = JSON.parse(icons);
         var prefix = 'wi-';
-        var code = ans.weather[0].id;
+        var code = weather.weather[0].id;
         var icon = weatherIcons[code].icon;
 
         if (!(code > 699 && code < 800) && !(code > 899 && code < 1000)) {
@@ -44,7 +44,6 @@ window.onload = () => {
         }
 
         icon = prefix + icon;
-        console.log(icon);
         document.querySelector('img').src = `svg/${icon}.svg`;
     });
     mapService.initMap()

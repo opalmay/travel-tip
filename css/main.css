@@ -1,7 +1,8 @@
-body{
+body {
     margin: 0;
+    text-align: center;
+    font-size: 20px;
 }
-
 
 /* flex */
 
@@ -24,7 +25,8 @@ body{
 .flex.justify-center {
     justify-content: center;
 }
-.flex.justify-evenly{
+
+.flex.justify-evenly {
     justify-content: space-evenly;
 }
 
@@ -35,13 +37,31 @@ body{
 .flex.align-strech {
     align-items: stretch;
 }
+.flex.align-start{
+    align-items: start;
+}
 
 .flex .align-self-center {
     align-self: center;
 }
 
-
 /* WEATHER */
-.weatherIcon{
+
+.weather {
+    display: inline-block;
+    border: 2px solid black;
+    padding: 1rem;
+}
+
+.weather .weatherIcon {
     width: 2rem;
+}
+
+
+.currLocation{
+    text-align: left;
+}
+.map{
+    width: 50%;
+    height: 400px;
 }
