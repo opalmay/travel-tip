@@ -24,7 +24,6 @@ function getLatLngNewLocation(address){
     })
     
 }
-
 function onGoToLocation(lat, lng) {
     gLastLocation = { lat, lng };
     getLocationStr(lat, lng);
@@ -73,7 +72,7 @@ function onCopyLocation() {
 window.onload = () => {
     document.querySelector('.myLocation').addEventListener('click', onGoToMyLocation);
     document.querySelector('.copyLocation').addEventListener('click', onCopyLocation);
-    document.querySelector('.my-location-go').addEventListener('click', print);
+    document.querySelector('.my-location-go').addEventListener('click', newAddress);
 
     const urlParams = new URLSearchParams(window.location.search);
     const lat = +urlParams.get('lat');
@@ -90,12 +89,7 @@ function newAddress() {
     getLatLngNewLocation(document.querySelector('#my-location-input').value);
 }
 function showToast() {
-    // Get the snackbar DIV
     var x = document.getElementById("snackbar");
-  
-    // Add the "show" class to DIV
     x.className = "show";
-  
-    // After 3 seconds, remove the show class from DIV
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   }
