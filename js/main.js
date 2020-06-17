@@ -66,7 +66,7 @@ function renderWeather(weather) {
     }
 }
 function onCopyLocation() {
-    navigator.clipboard.writeText(`opalmay.github.io/travel-tip/index.html?lat=${gLastLocation.lat}&lng=${gLastLocation.lng}`);
+    navigator.clipboard.writeText(`opalmay.github.io/travel-tip/index.html?lat=${lastLocation.lat}&lng=${lastLocation.lng}`);
     // navigator.clipboard.writeText(`http://127.0.0.1:5500/index.html?lat=${lastLocation.lat}&lng=${lastLocation.lng}`);
     showToast();
 }
