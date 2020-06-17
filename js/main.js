@@ -29,20 +29,22 @@ function onGoToLocation(lat, lng) {
 // })
 
 window.onload = () => {
-    document.querySelector('myLocation').addEventListener('click', onGoToMyLocation);
-    // mapService.initMap()
-    //     .then(() => {
+    // document.querySelector('myLocation').addEventListener('click', onGoToMyLocation);
 
-    //         mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-    //     })
-    //     .catch(console.log('INIT MAP ERROR'));
+    mapService.initMap()
+        .then(() => {
 
-    // locService.getPosition()
-    //     .then(pos => {
+            mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+        })
+        .catch(console.log('INIT MAP ERROR'));
 
-    //         console.log('User position is:', pos.coords);
-    //     })
-    //     .catch(err => {
-    //         console.log('err!!!', err);
-    //     })
+    locService.getPosition()
+        .then(pos => {
+            console.log(pos)
+            document.querySelector('.currLocation').innerText = 1
+            console.log('User position is:', pos.coords);
+        })
+        .catch(err => {
+            console.log('err!!!', err);
+        })
 }
