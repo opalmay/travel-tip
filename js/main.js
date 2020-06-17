@@ -55,12 +55,6 @@ window.onload = () => {
 
     locService.getPosition()
         .then(pos => {
-<<<<<<< HEAD
-            console.log(pos)
-            document.querySelector('.currLocation').innerText = 1
-=======
-
->>>>>>> 4e75c606e2d0d033e32f32f63ce9bff9d2066c65
             console.log('User position is:', pos.coords);
         })
         .catch(err => {

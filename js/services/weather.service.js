@@ -1,6 +1,3 @@
-//3bde70a5cfe0bfcf4827a51e338cf54f
-//http://api.openweathermap.org/data/2.5/weather?lat=32.0749831&lon=34.9120554&appid=3bde70a5cfe0bfcf4827a51e338cf54f
-
 export const weatherService = {
     getWeather
 }
@@ -14,7 +11,7 @@ export function getWeather(lat, lon) {
                 const ans = JSON.parse(httpRequest.responseText);
                 resolve(ans);
                 }
-                
+
             }
         }
 
