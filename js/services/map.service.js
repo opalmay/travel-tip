@@ -2,6 +2,7 @@
 export const mapService = {
     initMap,
     addMarker,
+    clearMarkers,
     getAddressWithAxios,
     getLatLngWithAxios,
     panTo
@@ -9,6 +10,7 @@ export const mapService = {
 
 
 var map;
+var markers = [];
 
 
 export function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -29,6 +31,7 @@ function addMarker(loc) {
         map: map,
         // title: 'Hello World!'
     });
+    markers.push(marker);
     return marker;
 }
 
@@ -61,3 +64,12 @@ function getLatLngWithAxios(address) {
         .then(res => res.data)
 }
 
+function clearMarkers() {
+    setMapOnAll(null);
+  }
+
+  function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
