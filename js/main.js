@@ -25,8 +25,14 @@ function onGoToLocation(lat, lng) {
 }
 function renderWeather(weather) {
     let elWeather = document.querySelector('.weather');
-    elWeather.querySelector('.weatherFirstLine').innerText = `${weather.name}, ${weather.sys.country} ${weather.weather[0].description}`;
-    elWeather.querySelector('.weatherSecondLine').innerText = `${weather.main.temp}, temperature from ${weather.main.temp_min} to ${weather.main.temp_max}C,
+
+    let firstLine = elWeather.querySelector('.weatherFirstLine');
+    firstLine.querySelector('span').innerText = `${weather.name}, ${weather.sys.country}`;
+    firstLine.innerHTML +=  ` ${weather.weather[0].description}`;
+
+    let secondLine = elWeather.querySelector('.weatherSecondLine');
+    secondLine.querySelector('span').innerText = `${weather.main.temp}C`;
+    secondLine.innerHTML += ` temperature from ${weather.main.temp_min} to ${weather.main.temp_max}C,
     wind ${weather.wind.speed} m/s`;
 }
 window.onload = () => {

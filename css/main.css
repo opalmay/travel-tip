@@ -4,6 +4,10 @@ body {
     font-size: 20px;
 }
 
+h3 {
+    margin: 0;
+}
+
 /* flex */
 
 .flex {
@@ -37,7 +41,8 @@ body {
 .flex.align-strech {
     align-items: stretch;
 }
-.flex.align-start{
+
+.flex.align-start {
     align-items: start;
 }
 
@@ -57,11 +62,25 @@ body {
     width: 2rem;
 }
 
+.weather .weatherFirstLine {
+    font-weight: bold;
+}
 
-.currLocation{
+.weather .weatherFirstLine span {
+    color: lightsalmon;
+}
+
+.weather .weatherSecondLine span {
+    background-color: lightgray;
+    border-radius: 1rem;
+    padding: 0.3rem;
+}
+
+.currLocation {
     text-align: left;
 }
-.map{
+
+.map {
     width: 50%;
     height: 400px;
 }
