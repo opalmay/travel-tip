@@ -14,7 +14,7 @@ export function getWeather(lat, lon) {
             }
         }
 
-        httpRequest.open('GET', `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=3bde70a5cfe0bfcf4827a51e338cf54f`, true);
+        httpRequest.open('GET', `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=3bde70a5cfe0bfcf4827a51e338cf54f`, true);
         httpRequest.send();
     });
 }
