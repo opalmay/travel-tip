@@ -28,6 +28,7 @@ function onGoToLocation(lat, lng) {
     gLastLocation = { lat, lng };
     getLocationStr(lat, lng);
     mapService.panTo({ lat, lng });
+    mapService.clearMarkers(); 
     mapService.addMarker({ lat, lng });
     weatherService.getWeather(lat, lng).then((weather) => renderWeather(weather));
 }
