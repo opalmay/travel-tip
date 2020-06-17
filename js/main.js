@@ -9,15 +9,23 @@ import { icons } from './icons.js';
 function onGoToMyLocation() {
     locService.getPosition().then(location => onGoToLocation(location.coords.latitude, location.coords.longitude))
 }
+
+function getLocationStr(lat, lng) {
+    var prmLocation = mapService.getAnsWithAxios(lat, lng);
+    prmLocation.then((locationStr) => {
+        renderLocationStr(locationStr)
+    })
+}
+
 function onGoToLocation(lat, lng) {
+    getLocationStr(lat, lng);
     mapService.panTo({ lat, lng });
     mapService.addMarker({ lat, lng });
-    renderLocation('test');
     weatherService.getWeather(lat, lng).then((weather) => renderWeather(weather));
 }
 
-function renderLocation(locationName) {
-    document.querySelector('.currLocation span').innerText = locationName;
+function renderLocationStr(locationName) {
+    document.querySelector('.currLocation span').innerText = locationName.results[0].formatted_address;
 }
 
 function renderWeather(weather) {
@@ -52,18 +60,13 @@ window.onload = () => {
             onGoToMyLocation();
         })
         .catch(console.log('INIT MAP ERROR'));
-    locService.getPosition()
-        .then(pos => {
-            console.log('User position is:', pos.coords);
-            var prmAns = mapService.getAnsWithAxios(pos.coords.latitude, pos.coords.longitude);
-            prmAns.then((ans) => {
-                document.querySelector('.currLocation span').innerText = ans.results[0].formatted_address;
-                console.log(ans.results[0].formatted_address)
-            })
-        })
-        // .catch(err => {
-        //     console.log('err!!!', err);
-        // })
+    // locService.getPosition()
+    //     .then(pos => {
+    //         myLocation(pos)
+    //     })
+    // .catch(err => {
+    //     console.log('err!!!', err);
+    // })
     document.querySelector('.my-location-go').addEventListener('click', print);
 }
 
