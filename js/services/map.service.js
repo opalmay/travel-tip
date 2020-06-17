@@ -2,6 +2,7 @@
 export const mapService = {
     initMap,
     addMarker,
+    getAnsWithAxios,
     panTo
 }
 
@@ -51,5 +52,10 @@ function _connectGoogleApi() {
     })
 }
 
+function getAnsWithAxios(lat, long) {
+    console.log('jjj')
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyClTPtK0l8IZpFoc1EIcL6YeSKixkCMS_c`)
+        .then(res => res.data)
+}
 
 

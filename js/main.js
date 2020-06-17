@@ -22,7 +22,7 @@ function onGoToMyLocation() {
 function onGoToLocation(lat, lng) {
     mapService.panTo({ lat, lng });
 }
-function renderWeather(weather){
+function renderWeather(weather) {
     let elWeather = document.querySelector('.weather');
     elWeather.querySelector('.weatherFirstLine').innerText = `${weather.name},${weather.sys.country} ${weather.description}`;
     elWeather.querySelector('.weatherSecondLine').innerText = `${weather.main.temp}, temperature from ${weather.main.temp_min} to ${weather.main.temp_max}C,
@@ -30,7 +30,7 @@ function renderWeather(weather){
 }
 window.onload = () => {
     // document.querySelector('myLocation').addEventListener('click', onGoToMyLocation);
-    weatherService.getWeather(32.0749831,34.9120554).then((ans)=>{
+    weatherService.getWeather(32.0749831, 34.9120554).then((ans) => {
         console.log(ans)
         renderWeather(ans);
     });
@@ -42,15 +42,23 @@ window.onload = () => {
 
     locService.getPosition()
         .then(pos => {
-<<<<<<< HEAD
-            console.log(pos)
-            document.querySelector('.currLocation').innerText = 1
-=======
-
->>>>>>> 4e75c606e2d0d033e32f32f63ce9bff9d2066c65
+            console.log(pos.coords)
             console.log('User position is:', pos.coords);
+            var prmAns = mapService.getAnsWithAxios(pos.coords.latitude, pos.coords.longitude);
+            prmAns.then((ans) => {
+                document.querySelector('.currLocation').innerText = ans.results[0].formatted_address;
+                console.log(ans.results[0].formatted_address)
+            })
+
         })
+
         .catch(err => {
             console.log('err!!!', err);
         })
+    document.querySelector('.my-location-go').addEventListener('click', print);
+}
+
+
+function print() {
+    console.log(document.querySelector('#my-location-input').value);
 }
