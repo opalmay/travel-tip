@@ -7,7 +7,7 @@ export const mapService = {
     panTo
 }
 
-
+// Lala
 var map;
 
 
